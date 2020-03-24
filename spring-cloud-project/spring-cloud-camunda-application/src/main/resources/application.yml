@@ -1,0 +1,37 @@
+#camunda 配置
+#camunda:
+##  bpm:
+##    admin-user:
+##      id: admin
+##      password: admin
+##      firstName: admin
+##    filter:
+##      create: All tasks
+##    job-execution:
+##      enabled: true
+##    metrics:
+##      enabled: false
+##      db-reporter-activate: false
+#camunda:
+#  bpm:
+#    admin-user:
+#      id: kermit
+#      password: superSecret
+#      firstName: Kermit
+#    filter:
+#      create: All tasks
+
+#mysql 数据库配置
+spring:
+  application:
+    name: spring-camunda
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/camunda?serverTimezone=GMT%2B8&autoReconnect=true&useUnicode=yes&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+#    type: com.alibaba.druid.pool.DruidDataSource
+
+#服务端口
+server:
+  port: 8081

@@ -1,0 +1,51 @@
+<process id="invoice" name="invoice receipt" isExecutable="true">
+  ...
+</process>
+
+
+<process id="subProcess"
+         name="Process called from Super Process"
+         isExecutable="true"
+         camunda:isStartableInTasklist="false">
+...
+</process>
+
+
+
+<definitions id="definitions"
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:camunda="http://activiti.org/bpmn"
+  targetNamespace="Examples"
+  xmlns:tns="Examples">
+
+  <message id="newInvoice" name="newInvoiceMessage" />
+  <message id="payment" name="paymentMessage" />
+
+  <process id="invoiceProcess">
+
+    <startEvent id="messageStart" >
+        <messageEventDefinition messageRef="newInvoice" />
+    </startEvent>
+    ...
+    <intermediateCatchEvent id="paymentEvt" >
+        <messageEventDefinition messageRef="payment" />
+    </intermediateCatchEvent>
+    ...
+  </process>
+</definitions>
+
+
+
+
+ <serviceTask id="javaService" name="Java service invocation"
+               camunda:class="org.camunda.bpm.examples.bpmn.servicetask.ReverseStringsFieldInjected">
+
+    <extensionElements>
+      <camunda:field name="text1">
+        <camunda:expression>${genderBean.getGenderString(gender)}</camunda:expression>
+      </camunda:field>
+      <camunda:field name="text2">
+         <camunda:expression>Hello ${gender == 'male' ? 'Mr.' : 'Mrs.'} ${name}</camunda:expression>
+      </camunda:field>
+    </extensionElements>
+  </serviceTask>

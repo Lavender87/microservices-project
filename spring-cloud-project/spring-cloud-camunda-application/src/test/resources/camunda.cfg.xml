@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" >
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="url" value="jdbc:mysql://localhost:3306/camunda" />
+    <property name="username" value="root" />
+    <property name="password" value="123456" />
+    <property name="defaultAutoCommit" value="false" />
+  </bean>
+
+  <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
+
+<!--    <property name="jdbcUrl" value="jdbc:h2:mem:camunda;DB_CLOSE_DELAY=1000" />-->
+<!--    <property name="jdbcDriver" value="org.h2.Driver" />-->
+<!--    <property name="jdbcUsername" value="sa" />-->
+<!--    <property name="jdbcPassword" value="" />-->
+
+    <property name="dataSource" ref="dataSource" />
+
+    <!-- Database configurations -->
+    <property name="databaseSchemaUpdate" value="true" />
+
+    <!-- job executor configurations -->
+    <property name="jobExecutorActivate" value="false" />
+
+    <!--<property name="idGenerator" ref="uuidGenerator" />-->
+
+    <!-- activates the custom plugin to register the transform listener -->
+<!--    <property name="processEnginePlugins">-->
+<!--      <list>-->
+<!--        <bean class="org.camunda.bpm.example.modelapi.CustomElementsProcessEnginePlugin" />-->
+<!--      </list>-->
+<!--    </property>-->
+
+  </bean>
+
+
+  <bean id="uuidGenerator" class="org.camunda.bpm.engine.impl.persistence.StrongUuidGenerator" />
+</beans>

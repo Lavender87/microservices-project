@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_17o5k4g" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <bpmn:process id="timer_err_process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0yno4kp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_03mfuxc">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.gupao.edu.vip.uti.task319.EndEventListener" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_08r9wju</bpmn:incoming>
+      <bpmn:incoming>Flow_13iorao</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0yno4kp" sourceRef="StartEvent_1" targetRef="Activity_0uob8g4" />
+    <bpmn:sequenceFlow id="Flow_08r9wju" sourceRef="Activity_1e7914i" targetRef="Event_03mfuxc" />
+    <bpmn:serviceTask id="Activity_0uob8g4" camunda:class="com.gupao.edu.vip.uti.task319.FirstTaskService">
+      <bpmn:incoming>Flow_0yno4kp</bpmn:incoming>
+      <bpmn:outgoing>Flow_13iorao</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1e7914i" camunda:class="com.gupao.edu.vip.uti.task319.SecondTaskService">
+      <bpmn:incoming>Flow_0madk1u</bpmn:incoming>
+      <bpmn:outgoing>Flow_08r9wju</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0madk1u" sourceRef="oneMinutes" targetRef="Activity_1e7914i" />
+    <bpmn:intermediateCatchEvent id="oneMinutes" name="1分钟">
+      <bpmn:incoming>Flow_0jstuss</bpmn:incoming>
+      <bpmn:outgoing>Flow_0madk1u</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_02kjark">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:boundaryEvent id="Event_14db862" attachedToRef="Activity_0uob8g4">
+      <bpmn:outgoing>Flow_0jstuss</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1b2lgta" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_0jstuss" sourceRef="Event_14db862" targetRef="oneMinutes" />
+    <bpmn:sequenceFlow id="Flow_13iorao" sourceRef="Activity_0uob8g4" targetRef="Event_03mfuxc" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="timer_err_process">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03mfuxc_di" bpmnElement="Event_03mfuxc">
+        <dc:Bounds x="722" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0yno4kp_di" bpmnElement="Flow_0yno4kp">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08r9wju_di" bpmnElement="Flow_08r9wju">
+        <di:waypoint x="610" y="270" />
+        <di:waypoint x="656" y="270" />
+        <di:waypoint x="656" y="117" />
+        <di:waypoint x="722" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0y8ht2t_di" bpmnElement="Activity_0uob8g4">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18jkq31_di" bpmnElement="Activity_1e7914i">
+        <dc:Bounds x="510" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0madk1u_di" bpmnElement="Flow_0madk1u">
+        <di:waypoint x="408" y="270" />
+        <di:waypoint x="510" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1w7kbwr_di" bpmnElement="oneMinutes">
+        <dc:Bounds x="372" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="377" y="295" width="29" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1uyvot9_di" bpmnElement="Event_14db862">
+        <dc:Bounds x="312" y="139" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0jstuss_di" bpmnElement="Flow_0jstuss">
+        <di:waypoint x="330" y="175" />
+        <di:waypoint x="330" y="270" />
+        <di:waypoint x="372" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13iorao_di" bpmnElement="Flow_13iorao">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="722" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

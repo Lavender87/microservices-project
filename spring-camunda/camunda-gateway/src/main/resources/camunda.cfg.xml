@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" >
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="url" value="jdbc:mysql://localhost:3306/camunda" />
+    <property name="username" value="root" />
+    <property name="password" value="123456" />
+    <property name="defaultAutoCommit" value="false" />
+  </bean>
+
+  <bean id="uuidGenerator" class="org.camunda.bpm.engine.impl.persistence.StrongUuidGenerator" />
+
+  <bean id="processEngineConfiguration" class="org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
+    <property name="dataSource" ref="dataSource" />
+    <!-- Database configurations -->
+    <property name="databaseSchemaUpdate" value="true" />
+    <!-- job executor configurations -->
+    <property name="jobExecutorActivate" value="false" />
+<!--    <property name="idGenerator" ref="uuidGenerator" />-->
+  </bean>
+
+
+
+</beans>

@@ -1,0 +1,2 @@
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+com.gupao.micro.services.spring.cloud.config.myPropertySourceLocator

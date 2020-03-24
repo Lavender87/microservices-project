@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1xm6a1s" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <bpmn:process id="Process_1khz2ve" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_07wcgng</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_092yz1t">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.gupao.edu.vip.uti.task316.TaskEndEventListener" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0wqfudj</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1q9jifo" name="Enrich  First" camunda:class="com.gupao.edu.vip.uti.task316.FirstTaskService">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_28c2pbc">12313</camunda:inputParameter>
+          <camunda:outputParameter name="Output_05dlmrb">342342</camunda:outputParameter>
+        </camunda:inputOutput>
+        <camunda:executionListener class="com.gupao.edu.vip.uti.task316.TaskEndEventListener" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_07wcgng</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pkchtj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0iiit9g" name="Enrich Second" camunda:class="com.gupao.edu.vip.uti.task316.SecondTaskService">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.gupao.edu.vip.uti.task316.TaskEndEventListener" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1pkchtj</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wqfudj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_07wcgng" sourceRef="StartEvent_1" targetRef="Activity_1q9jifo" />
+    <bpmn:sequenceFlow id="Flow_1pkchtj" sourceRef="Activity_1q9jifo" targetRef="Activity_0iiit9g" />
+    <bpmn:sequenceFlow id="Flow_0wqfudj" sourceRef="Activity_0iiit9g" targetRef="Event_092yz1t" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1khz2ve">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_092yz1t_di" bpmnElement="Event_092yz1t">
+        <dc:Bounds x="762" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0843uep_di" bpmnElement="Activity_1q9jifo">
+        <dc:Bounds x="320" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05ncpr8_di" bpmnElement="Activity_0iiit9g">
+        <dc:Bounds x="540" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_07wcgng_di" bpmnElement="Flow_07wcgng">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="320" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pkchtj_di" bpmnElement="Flow_1pkchtj">
+        <di:waypoint x="420" y="117" />
+        <di:waypoint x="540" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wqfudj_di" bpmnElement="Flow_0wqfudj">
+        <di:waypoint x="640" y="117" />
+        <di:waypoint x="762" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
