@@ -10,7 +10,7 @@
         <module>spring-cloud-project/spring-cloud-kafka-application</module>
         <module>spring-camunda</module>
         <module>spring-boot-camunda-web</module>
-
+		<module>spring-drools-demo</module>
 
     </modules>
 	<parent>
@@ -27,6 +27,7 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
+		<spring-cloud.version>Greenwich.SR4</spring-cloud.version>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -40,5 +41,17 @@
 <!--			</plugin>-->
 <!--		</plugins>-->
 <!--	</build>-->
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

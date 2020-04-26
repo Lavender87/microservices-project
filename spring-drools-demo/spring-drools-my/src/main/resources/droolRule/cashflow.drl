@@ -1,0 +1,18 @@
+package droolscours
+//list any import classes here.
+import droolscours.AccountingPeriod;
+import droolscours.CashFlow;
+import droolscours.Account;
+import util.OutputDisplay;
+
+global OutputDisplay showResults;
+
+rule "Credit rule"
+
+    when
+           $cash :CashFlow(type == CashFlow.CREDIT )
+           $acc : Account(  )
+       then
+           $acc.setBalance($acc.getBalance()+$cash.getAmount());
+           showResults.showText("Account no "+$acc.getAccountNo()+ " has now a balance of "+$acc.getBalance());
+end

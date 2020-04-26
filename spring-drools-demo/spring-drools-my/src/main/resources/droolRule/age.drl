@@ -1,0 +1,16 @@
+import com.gupao.vip.drools.edu.entity.Person
+
+dialect  "mvel"
+
+rule "age3"
+    when
+        $person : Person(age<16 || age>50)
+    then
+    System.out.println($person.getName()+":的年龄为"+$person.getAge()+"====不符合要求！");
+end
+rule "rightAge"
+     when
+          $person : Person(age>=16 && age<=50)
+     then
+         System.out.println($person.getName()+":的年龄为"+$person.getAge()+"====符合要求！");
+end

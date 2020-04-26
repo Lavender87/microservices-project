@@ -8,7 +8,7 @@
         <module>spring-cloud-config-server</module>
         <module>spring-cloud-service-discovery-client</module>
         <module>spring-cloud-client-application</module>
-        <module>spring-cloud-serverdemo-appliction</module>
+        <module>spring-cloud-server-appliction</module>
         <module>spring-cloud-servlet-gateway</module>
         <module>spring-cloud-feign-application</module>
         <module>spring-cloud-kafka-application</module>
@@ -20,6 +20,7 @@
         <module>spring-cloud-eureka</module>
         <module>spring-boot-event-bus-optim</module>
         <module>spring-boot-config-server-2020328</module>
+        <module>spring-boot-config-client-2020330</module>
 
 
     </modules>
@@ -32,9 +33,7 @@
     <packaging>pom</packaging>
 
     <artifactId>spring-cloud-project</artifactId>
-    <properties>
-        <spring-cloud.version>Greenwich.SR4</spring-cloud.version>
-    </properties>
+
 
     <dependencies>
 
@@ -72,16 +71,6 @@
 
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
 
 </project>

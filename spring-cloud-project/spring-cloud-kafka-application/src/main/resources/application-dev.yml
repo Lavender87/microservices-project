@@ -25,7 +25,8 @@ mybatis:
   type-aliases-package: com.gupao.springkafkademo.entity
 
 
-
+kafka:
+  topic: test
 #  kafka:
 #    # 以逗号分隔的地址列表，用于建立与Kafka集群的初始连接(kafka 默认的端口号为9092)
 #    bootstrap-servers: 192.168.0.102:9092

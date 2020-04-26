@@ -6,6 +6,7 @@ import com.gupao.springkafkademo.entity.Employee;
 import com.gupao.springkafkademo.entity.MessageVo;
 import com.gupao.springkafkademo.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,21 @@ import java.util.Map;
 
 @RestController
 public class MessageSendController {
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+//    @Autowired
+//    private KafkaTemplate<String, String> kafkaTemplate;
+
+    //方式二
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    private final String topic;
+
+    public MessageSendController(KafkaTemplate<String, String> kafkaTemplate,
+                                 @Value("${kafka.topic}") String topic) {
+        this.kafkaTemplate = kafkaTemplate;
+        this.topic = topic;
+
+        System.out.println("this.topic--"+this.topic);
+    }
 
     @Autowired
     private CompanyService companyService;
