@@ -19,6 +19,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 
 import java.io.IOException;
 
+
 @Configuration
 public class RuleEngineConfig {
 
@@ -26,42 +27,19 @@ public class RuleEngineConfig {
     private static final String RULES_PATH = "droolRule/";
     private final KieServices kieServices = KieServices.Factory.get();
 
-    @Bean
-    public KieFileSystem kieFileSystem() throws IOException {
-        KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
-        ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-        Resource[] files = resourcePatternResolver.getResources("classpath*:" + RULES_PATH + "*.*");
-        String path = null;
-        for (Resource file : files) {
-            path = RULES_PATH + file.getFilename();
-            LOGGER.info("path="+path);
-            kieFileSystem.write(ResourceFactory.newClassPathResource(path, "UTF-8"));
-        }
-        return kieFileSystem;
-    }
 
     @Bean
     public KieContainer kieContainer() throws IOException {
-        KieRepository kieRepository = kieServices.getRepository();
-        kieRepository.addKieModule(kieRepository::getDefaultReleaseId);
-        KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem());
-        kieBuilder.buildAll();
-        return kieServices.newKieContainer(kieRepository.getDefaultReleaseId());
+        return KieServices.Factory.get().getKieClasspathContainer();
     }
-
-    @Bean
-    public KieBase kieBase() throws IOException {
-        return kieContainer().getKieBase();
-    }
-
+//    @Bean
+//    public KieBase kieBase() throws IOException {
+//        return kieContainer().getKieBase();
+//    }
     @Bean
     public KieSession kieSession() throws IOException {
-        return kieContainer().newKieSession();
+        return kieContainer().newKieSession( "ksession-hello"); //"ksession-hello"
     }
 
-    @Bean
-    public KModuleBeanFactoryPostProcessor kiePostProcessor() {
-        return new KModuleBeanFactoryPostProcessor();
-    }
 
 }

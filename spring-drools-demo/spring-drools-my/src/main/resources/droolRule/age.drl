@@ -1,3 +1,4 @@
+package droolRule
 import com.gupao.vip.drools.edu.entity.Person
 
 dialect  "mvel"

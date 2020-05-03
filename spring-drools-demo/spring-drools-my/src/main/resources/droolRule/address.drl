@@ -1,4 +1,4 @@
-package com.rules
+package droolRule
 
 import com.gupao.vip.drools.edu.entity.Address;
 

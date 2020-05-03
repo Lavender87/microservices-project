@@ -1,3 +1,6 @@
+package droolRule
+
+
 import com.gupao.vip.drools.edu.entity.ParamInfo ;
 import com.gupao.vip.drools.edu.entity.RuleResult;
 import org.slf4j.Logger
@@ -6,10 +9,22 @@ import org.slf4j.LoggerFactory ;
 dialect  "java"
 rule "datatransfor1"
     when
-        paramInfo : ParamInfo(murex3Id != null)
+        ParamInfo(murex3Id != null)
         ruleResult : RuleResult()
     then
         final Logger LOGGER = LoggerFactory.getLogger("datatransfor1 规则引擎") ;
-        LOGGER.info("参数:paramInfo"+paramInfo.toString());
-        ruleResult.setMsg(paramInfo.toString());
+        LOGGER.info("参数:murex3Id==null");
+        ruleResult.setMsg("murex3Id is null");
+end
+
+
+rule "datatransfor2"
+    when
+        ParamInfo(settleType != null)
+        p: ParamInfo(settleType != null)
+        ruleResult : RuleResult()
+    then
+        final Logger LOGGER = LoggerFactory.getLogger("datatransfor2 规则引擎") ;
+        LOGGER.info("参数:p"+p.toString());
+        ruleResult.setMsg("settleType is null");
 end

@@ -32,14 +32,17 @@ public class TestController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/mydata",method = RequestMethod.GET)
-    public String testPapamInfo(){
+    @RequestMapping(value = "/mydata/{murexid}/{settletype}",method = RequestMethod.GET)
+    public String testPapamInfo(@PathVariable(value = "murexid") String murexid,
+                                @PathVariable(value = "settletype") String settletype){
         ParamInfo paramInfo = new ParamInfo() ;
-        paramInfo.setMurex3Id(UUID.randomUUID().toString())
-                .setIsoCode("USF")
+
+        paramInfo.setIsoCode("USF")
                 .setLocalId("4556792")
-                .setSettleType("CASH")
                 .setDataStatus("UPDATE");
+
+        if(!"0".equals(murexid))paramInfo.setMurex3Id(murexid);
+        if(!"0".equals(settletype))paramInfo.setSettleType(settletype);
 
         // 入参
         kieSession.insert(paramInfo) ;
